@@ -7,6 +7,10 @@ function PlantPage() {
   const plantsUrl = 'http://localhost:6001/plants'
   const [plants, setPlants] = useState([])
   const [searchParams, setSearchParams] = useState('')
+  const [edit, setEdit] = useState({
+    id: null,
+    status: false
+  })
 
   const handlePlantSubmission = (e, newPlant) => {
     e.preventDefault()
@@ -42,6 +46,19 @@ function PlantPage() {
     .catch(err => console.log(err))
   }
 
+  const handleEdit = (id) => {
+    setEdit({
+      id: id,
+      status : true,
+
+    })
+  }
+
+  const handleEditSubmission = () => {
+
+
+  }
+
   useEffect(() => {
     fetch(plantsUrl)
     .then(resp => resp.json())
@@ -50,9 +67,9 @@ function PlantPage() {
 
   return (
     <main>
-      <NewPlantForm handlePlantSubmission={handlePlantSubmission}/>
+      <NewPlantForm handlePlantSubmission={handlePlantSubmission} handleEditSubmission={handleEditSubmission} edit={edit} plants={plants}/>
       <Search handleSearchParams={handleSearchParams}/>
-      <PlantList plants={plants} searchParams={searchParams} handleDelete={handleDelete} />
+      <PlantList plants={plants} searchParams={searchParams} handleDelete={handleDelete} handleEdit={handleEdit} />
     </main>
   );
 }

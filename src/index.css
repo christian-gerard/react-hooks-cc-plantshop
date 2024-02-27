@@ -57,6 +57,27 @@ main {
   background-color: rgba(181, 250, 181, 0.5);
 }
 
+.edit-form {
+  padding: 2rem 1rem;
+  margin: 2rem 0;
+  background-color: lightblue;
+}
+
+.edit-form form {
+  display: flex;
+  justify-content: center;
+}
+
+.edit-form input {
+  margin-right: 2rem;
+  flex: 1;
+}
+
+.edit-form button {
+  width: 150px;
+}
+
+
 .new-plant-form form {
   display: flex;
   justify-content: center;
@@ -99,6 +120,10 @@ input:focus {
 
 .remove {
   background:lightcoral
+}
+
+.edit {
+  background: lightblue
 }
 
 .button-container {

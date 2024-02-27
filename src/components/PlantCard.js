@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-function PlantCard({id,image,name,price,handleDelete}) {
+function PlantCard({id,image,name,price,handleDelete,handleEdit}) {
   const [status, setStatus] = useState(true)
 
   const toggleStatus = () => {
@@ -20,6 +20,7 @@ function PlantCard({id,image,name,price,handleDelete}) {
       ) : (
         <button onClick={toggleStatus}>Out of Stock</button>
       )}
+      <button className='edit' onClick={() => handleEdit(id)}>Edit</button>
       <button className='remove' onClick={() => handleDelete(id)}>X</button>
 
       </div>

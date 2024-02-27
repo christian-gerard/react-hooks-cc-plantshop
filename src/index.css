@@ -97,6 +97,16 @@ input:focus {
   border-bottom: 2px solid var(--green);
 }
 
+.remove {
+  background:lightcoral
+}
+
+.button-container {
+
+display:flex;
+justify-content: space-between;
+}
+
 .cards {
   list-style: none;
 }

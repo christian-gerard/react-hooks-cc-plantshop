@@ -7,13 +7,11 @@ function PlantPage() {
   const plantsUrl = 'http://localhost:6001/plants'
   const [plants, setPlants] = useState([])
   const [searchParams, setSearchParams] = useState('')
-  const [edit, setEdit] = useState({
-    id: null,
-    status: false
-  })
+  const [edit, setEdit] = useState(0)
 
   const handlePlantSubmission = (e, newPlant) => {
     e.preventDefault()
+    console.log(newPlant)
     fetch(plantsUrl,{
       method: 'POST',
       headers: {"Content-Type": "application/json"},
@@ -24,7 +22,7 @@ function PlantPage() {
         setPlants([...plants,newPlant])
       }
     })
-    .catch(err => console.log(err))
+    .catch(err => alert(err))
 
   }
 
@@ -47,17 +45,32 @@ function PlantPage() {
   }
 
   const handleEdit = (id) => {
-    setEdit({
-      id: id,
-      status : true,
+    setEdit(id)
+  }
 
+  const handleEditSubmission = (e,newPlant) => {
+    e.preventDefault();
+
+    fetch(`${plantsUrl}/${newPlant.id}`,{
+      method: 'PATCH',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newPlant)
     })
+    .then(resp => {
+      if(resp.ok) {
+        setPlants(plants => plants.map((plant) => plant.id === newPlant.id ? newPlant : plant))
+      }
+    })
+    .catch(err => console.log(err))
+
+
+
+    setEdit(0)
+
   }
-
-  const handleEditSubmission = () => {
-
-
-  }
+  
 
   useEffect(() => {
     fetch(plantsUrl)
